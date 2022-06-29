@@ -109,5 +109,17 @@ Since this command does not provide any arguements, you would neeed to walk thro
   ![chain ID](/images/3.png "Chain ID")
   Every EVM based blockchain has a special parameter called a `chainID`. ChainIDs are expected to be unique values, you can check [chainlist.org](https://chainlist.org/) to see if your proposed chain ID is already in use. We will be making use of the chain ID `1970` (A pun on JavaScript dates...lol).
 
-* Select a symbol for the native subnet token: 
+* Select a symbol for the native subnet token
   ![symbol](/images/4.png "token symbol")
+
+* Set fees: Select the `low disk use / low throughput` option
+  ![fees](/images/5.png "fees")
+
+* Airdrop: default to airdrop 1 million tokens to provided address
+  ![airdrop](/images/6.png "airdrop")
+
+* Add a custom precompile to modify the EVM: For this section, we will not be using a pre-compile script
+  ![precompile](/images/7.png "precompile")
+
+
+The wizard won't customize every aspect of the Subnet-EVM genesis for you, we will be doing this in the subsequent sections.
