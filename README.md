@@ -201,4 +201,17 @@ For detailed instructions on how to set-up the new RPC network to work with meta
 ## Step 4: Deploying a Test Smart Contract on the Subnet.
 
 From your preferred web browser, navigate to the [Remix](https://remix.ethereum.org/) Platform.
-We will be importing a sample solidity code from a git
+We will be importing a sample solidity code from a this github repository.
+
+From the remix home page, select the `Load from github` option.
+
+![github](/images/15.png "github")
+
+In the dialogue box, paste the following link.
+```zsh
+https://github.com/FibrinLab/Avalanche-Private-Permissioned-Subnets/blob/main/src/medical_records.sol
+```
+
+On the Remix Menu, select the `compile` tab and compile the `medical_records` smart contract using the appropriate solidity compiler version. Remix im most cases automatically detects the suitable compiler version for your project.
+
+![compile](/images/16.png "compile")
