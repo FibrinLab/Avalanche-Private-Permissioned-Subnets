@@ -54,22 +54,6 @@ Subnets have various advantages which include:
 The challenges and risks related to centralized health records can be basically summarised as vulnerablity and access management difficulties. Various bodies has studied and fully comprehened the risks involved in data loss in [centralised systems](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3068075/). 
 Among other things, this conclusion led the US Department of Defense to create in 1969 the ARPANET, a network system that would be able to remain functional in case of a catastrophe. Regarding health data, the same approach can be applied and it would be obviously much safer to store such data in a decentralised permissioned fashion to ensure the protection of information, as it could be, for example, a target for terrorists who wish to destabilize a country by destroying or by pirating its health system and by divulging health information on citizens. Furthermore, hackers may see a centralized system as a challenge and try to gain access to a centralized patient EMR system and modify patients' medical information.
 
-# Roadmap
-
-This tutorial is created to serve as a guide to enable developers create fully customizable Avalanche subnets. For the purpose of this tutorial, all testing will be done on the Local and Fiji testnet. This guide is an extension of the [Official Avalanche Documentation]().
-
-We will be creating a blockchain network specific for managing healthcare data and transactions. This network would have the ablity to regulate it validator requirements and ensure a certain degree of privacy as if necessary for managing sensitive data.
-
-Please note that all command line inputs and sample codes are MacOs and Linux Based. Commands may vary for other operating systems.
-
-In summary, we will be discussing the following:
-1. Running an EVM Subnet on a Local Network
-2. Restricting Smart Contract Deployment on the Local Network
-3. Running an EVM Subnet on Fuji Testnet
-4. Private Transaction Posting and Reading
-5. Specifying Validator Requirement
-
-
 ## Prerequisites
 
 ### NodeJS and Yarn
@@ -90,7 +74,25 @@ To check the current Git version use:
 git --version
 ```
 
-# 1. Running an EVM Subnet on the Local Network using the default configuration
+
+# Roadmap
+
+This tutorial is created to serve as a guide to enable developers create fully customizable Avalanche subnets. For the purpose of this tutorial, all testing will be done on the Local and Fiji testnet. This guide is an extension of the [Official Avalanche Documentation]().
+
+We will be creating a blockchain network specific for managing healthcare data and transactions. This network would have the ablity to regulate it validator requirements and ensure a certain degree of privacy as if necessary for managing sensitive data.
+
+Please note that all command line inputs and sample codes are MacOs and Linux Based. Commands may vary for other operating systems.
+
+In summary, we will be discussing the following:
+1. Running an EVM Subnet on the Local Network using the default configuration
+2. Restricting Smart Contract Deployment on the Local Network
+3. Running an EVM Subnet on Fuji Testnet
+4. Private Transaction Posting and Reading
+5. Specifying Validator Requirement
+
+
+
+## 1. Running an EVM Subnet on the Local Network using the default configuration <a name="local"></a>
 
 We will be creating an EVM on our local machine to give us a basic feel on how a subnet functions. The [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) is a novel tool that allow up to have a local network up in minutes.
 
@@ -215,3 +217,19 @@ https://github.com/FibrinLab/Avalanche-Private-Permissioned-Subnets/blob/main/sr
 On the Remix Menu, select the `compile` tab and compile the `medical_records` smart contract using the appropriate solidity compiler version. Remix im most cases automatically detects the suitable compiler version for your project.
 
 ![compile](/images/16.png "compile")
+
+Next, select the Deploy tab and choose the `Injected Web3` from the dropdown. This option allows you to make use you newly created network rather that a simulated environment provided for you by Remix.
+
+![compile](/images/17.png "compile")
+
+Select the correct prefunded account and Deploy the smart contract.
+
+![compile](/images/18.png "compile")
+
+Hooray... lol. You just deployed your first smart contract for managing Health related transcations on a Subnet you created.
+We would subsequently be customising this subnet to achieve varying levels of privacy.
+
+![final](/images/19.png "final")
+
+
+
