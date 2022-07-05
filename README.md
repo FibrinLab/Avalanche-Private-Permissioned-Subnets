@@ -85,14 +85,12 @@ Please note that all command line inputs and sample codes are MacOs and Linux Ba
 
 In summary, we will be discussing the following:
 1. Running an EVM Subnet on the Local Network using the default configuration
-2. Restricting Smart Contract Deployment on the Local Network
-3. Running an EVM Subnet on Fuji Testnet
-4. Private Transaction Posting and Reading
-5. Specifying Validator Requirement
+2. Restricting Smart Contract Deployment, Transaction and making our Subnet Private on the Local Network
+3. Private Transaction Posting and Reading
 
 
 
-## 1. Running an EVM Subnet on the Local Network using the default configuration <a name="local"></a>
+# 1. Running an EVM Subnet on the Local Network using the default configuration <a name="local"></a>
 
 We will be creating an EVM on our local machine to give us a basic feel on how a subnet functions. The [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) is a novel tool that allow up to have a local network up in minutes.
 
@@ -232,4 +230,85 @@ We would subsequently be customising this subnet to achieve varying levels of pr
 ![final](/images/19.png "final")
 
 
+# 2. Restricting Smart Contract Deployment, Transaction and making our Subnet Private on the Local Network
 
+In this section we are going to set some rules for our Local Subnet by Restricting Smart contract deployments to certain addresses. This function is quite essestial especially in the field of decentralized health. Imagine you have a private permissioned blockchain for a group of health providers, it would be quite essential to specify the role associated to various addresses to ensure the strictest data security and data privacy.
+
+In order to achieve this, we will be specifying our own `genesis file` to be used with the `Avalanche-cli`.
+
+The `genesis file` we will be making use of is located at:
+
+```zsh
+https://github.com/FibrinLab/Avalanche-Private-Permissioned-Subnets/blob/main/networks/genesis.json
+```
+
+Let carefully examine our `Genesis File`.
+The genesis file specifies the initial state of the Virtual Machine with it is created. In trying to implement restrictions towards deploying smart contracts, there are certain parameters we will be taking a closer look at. They include:
+* `contractDeployerAllowListConfig` and
+* `txAllowListConfig`
+
+
+In order to put this into practice, we are going to create a `Local Avalance Subnet` for a group of hospitals where only the `Administrator` is allowed to deploy smart contracts. We will also see how to add other `Hospital Admins` to the allowed addresses to deploy contracts. Awesome, lets get started.
+
+## Step 1
+
+Lets have a look at our `genesis file`. The genesis file is usually in JSON format and passed as a parameter with initializing the `Avalanche-cli`.
+
+```zsh
+"contractDeployerAllowListConfig": {
+        "blockTimestamp": 0,
+        "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+},
+```
+
+From the above code the `adminAddress` is set to `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC`. This address has the ability to add other address that can also deploy contracts.
+
+```zsh
+"alloc": {
+      "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
+        "balance": "0x84595161401484A000000"
+      }
+},
+```
+
+The `alloc` defines addresses and their intial balances. Here we airdrop `1million` tokens to the admin address. `84595161401484A000000` is in hexidecimal, you can make use of a [converter](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to get the decimal equivalent.
+
+Great, Its time to get our `Custom EVM subnet` running.
+
+## Step 2
+
+Navigate to your project directory and run the following command.
+
+```zsh
+avalanche subnet create [subnetName] --file <pathToGenesis>
+```
+
+Notice how we use the --file flag to specify a path to the `Genesis file`.
+
+![gen1](/images/22.png "gen1")
+
+Select the `SubnetEVM` Virtual machine
+
+![gen2](/images/23.png "gen2")
+
+Great you have sucessfully created a genesis.
+
+You can verify this by running the following command
+
+```zsh
+avalanche subnet list
+```
+
+![gen3](/images/24.png "gen3")
+
+Its now time to deploy. Go ahead and run the following command
+
+```zsh
+avalanche subnet deploy <subnetName>
+```
+
+![gen4](/images/25.png "gen4")
+
+We go our subnet deployed and running locally.
+
+# Conclusion
