@@ -271,7 +271,7 @@ From the above code the `adminAddress` is set to `0x8db97C7cEcE249c2b98bDC0226Cc
 },
 ```
 
-The `alloc` defines addresses and their intial balances. Here we airdrop `1million` tokens to the admin address. `84595161401484A000000` is in hexidecimal, you can make use of a [converter](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to get the decimal equivalent.
+The `alloc` defines addresses and their intial balances. Here we airdrop `50million` tokens to the admin address. `84595161401484A000000` is in hexidecimal, you can make use of a [converter](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to get the decimal equivalent.
 
 Great, Its time to get our `Custom EVM subnet` running.
 
@@ -310,5 +310,52 @@ avalanche subnet deploy <subnetName>
 ![gen4](/images/25.png "gen4")
 
 We go our subnet deployed and running locally.
+
+### Step 3
+
+Go ahead and add the `RPC` credentials to metamask. 
+For detailed instructions on how to set-up the new RPC network to work with metamask, visit the Avalanche [Documentation](https://docs.avax.network/subnets/deploy-a-smart-contract-on-your-evm#step-1-setting-up-metamask)
+
+
+Create a new `Wallet Account` and fund it with some `TEST` tokens.
+
+![meta1](/images/26.png "meta1")
+
+![meta2](/images/27.png "meta2")
+
+From your preferred web browser, navigate to [Remix](https://remix.ethereum.org/).
+We will be importing the same `medical records` smart contract used earlier.
+
+From the remix home page, select the `Load from github` option.
+
+![github](/images/15.png "github")
+
+In the dialogue box, paste the following link.
+```zsh
+https://github.com/FibrinLab/Avalanche-Private-Permissioned-Subnets/blob/main/src/medical_records.sol
+```
+
+On the Remix Menu, select the `compile` tab and compile the `medical_records` smart contract using the appropriate solidity compiler version. Remix im most cases automatically detects the suitable compiler version for your project.
+
+![compile](/images/16.png "compile")
+
+Next, select the Deploy tab and choose the `Injected Web3` from the dropdown. This option allows you to make use you newly created network rather that a simulated environment provided for you by Remix.
+
+![compile](/images/17.png "compile")
+
+Select the newly created account (not the default admin account) and Deploy the smart contract. Make sure the chain ID matches that of you subnet.
+
+![deploy](/images/28.png "deploy")
+
+
+Notice that you get an error saying ===>
+
+```zsh
+0x61106F1b252a0459D4c50AcC3382b6878005A535 is not authorized to deploy a contract
+```
+
+![deploy1](/images/29.png "deploy1")
+
+We have sucessfully restricted contract deployment to only 1 address.
 
 # Conclusion
