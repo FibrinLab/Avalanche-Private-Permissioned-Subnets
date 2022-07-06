@@ -358,4 +358,70 @@ Notice that you get an error saying ===>
 
 We have sucessfully restricted contract deployment to only 1 address.
 
+
+### Step 4
+
+Not let add our newly created account to the `Allowed Contract Deployer` list. We accomplish this by importing the `AllowListInterface` into remix and executing some function calls from the `Admin` account. The interface is deployed at `0x0200000000000000000000000000000000000000`
+
+Create a new solidity file (.sol) and paste the following code
+
+```zsh
+// (c) 2022-2023, Ava Labs, Inc. All rights reserved.
+// See the file LICENSE for licensing terms.
+
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.8.0;
+
+interface AllowListInterface {
+    // Set [addr] to have the admin role over the allow list
+    function setAdmin(address addr) external;
+
+    // Set [addr] to be enabled on the allow list
+    function setEnabled(address addr) external;
+
+    // Set [addr] to have no role over the allow list
+    function setNone(address addr) external;
+
+    // Read the status of [addr]
+    function readAllowList(address addr) external view returns (uint256);
+}
+```
+
+The describes the available functions that can be called from the Admin account.
+* setAdmin: This make the passed in address an `admin`
+* setEnabled: Adds an account to the allowed `deployers` list
+
+Compile the contract and navigate to the `Deploy` tab.
+
+![deploy2](/images/30.png "deploy2")
+
+Make sure `MetaMask` is switched to the `Admin` account.
+
+Input the contract address `0x0200000000000000000000000000000000000000` and select `At Address`.
+
+![deploy3](/images/31.png "deploy3")
+
+This retrieves a deployed instance of the already deployed contract.
+
+Paste the address of the `new` metamask account in the `setEnabled` field and call the function.
+
+![deploy4](/images/32.png "deploy4")
+
+Switch to the new metamask account and try deploying a smart contract.
+
+![deploy5](/images/33.png "deploy5")
+
+![deploy6](/images/34.png "deploy6")
+
+
+Hoorayyyyyy. It works.
+
+
 # Conclusion
+
+We have sucessfully created our own customised EVM Subnet with various levels of restrictions. The applications of this configuration is endless when considering its potentials. We modified smart contract deployment permissions and made our subnet Private.
+
+Feel free to fork and improve this repo.
+
+Akanimoh Osutuk
